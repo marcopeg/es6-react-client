@@ -1,4 +1,4 @@
-# YouCollide Console
+# React Client
 
 ## First Setu
 
