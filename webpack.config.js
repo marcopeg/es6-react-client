@@ -9,10 +9,10 @@ module.exports = {
             'webpack/hot/only-dev-server',
             './app/app.dev',
         ],
-        specs: [
+        guide: [
             'webpack-dev-server/client?http://localhost:3000',
             'webpack/hot/only-dev-server',
-            './specs/ui-specs',
+            './guide/index',
         ],
     },
     output: {

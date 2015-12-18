@@ -12,7 +12,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Import here the component you are working on:
-import SpecComponent from '../specs/components/HelloWorld.spec';
+import GuideComponent from './components/HelloWorld.guide';
 require('../app/index.scss');
+require('./index.scss');
 
-ReactDOM.render((<SpecComponent />), document.getElementById('app'));
+ReactDOM.render((<GuideComponent />), document.getElementById('app'));
