@@ -4,22 +4,26 @@
  */
 
 require('./index.scss');
-const __DEBUG__ = true;
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { Main } from 'utils/main-dev';
+import { makeStore } from 'utils/store-dev';
+
 import { App } from 'containers/app';
-import { makeStore } from 'utils/store';
-import { setStudyId } from 'actions/app-actions';
+import { DEV as initialState } from 'fixtures/initial-state-dev.fixture';
 
-var Main = require(__DEBUG__ ? 'utils/main-debug' : 'utils/main').Main;
-var store = makeStore(__DEBUG__, require('fixtures/initial-state.fixture').DEV);
+export function start(targetEl, payload) {
 
-export function start(targetEl) {
+    // apply the host's page payload 
+    if (payload.title) {
+        initialState.app.title = payload.title;
+    }
+
     ReactDOM.render((
         <Main
             app={App}
-            store={store} />
+            store={makeStore(initialState)} />
     ), targetEl);
 }
