@@ -12,7 +12,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Import here the component you are working on:
-import SpecComponent from '../specs/components/Foo.spec';
+import SpecComponent from '../specs/components/HelloWorld.spec';
 require('../app/index.scss');
 
 ReactDOM.render((<SpecComponent />), document.getElementById('app'));

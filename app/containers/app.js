@@ -2,23 +2,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Login } from 'containers/Login';
-import { Dashboard } from 'containers/Dashboard';
+import Grid from 'react-bootstrap/lib/Grid';
+import { HelloWorld } from 'components/HelloWorld';
 
-@connect(s => s.login)
+@connect(s => s.app)
 export class App extends React.Component {
     render() {
-
-        var dashboard;
-        if (this.props.status) {
-            dashboard = <Dashboard />;
-        }
-
         return (
-            <div>
-                {dashboard}
-                <Login />
-            </div>
+            <Grid>
+                <HelloWorld content={this.props.title} />
+                <p>here you can write your app...</p>
+            </Grid>
         );
     }
 }

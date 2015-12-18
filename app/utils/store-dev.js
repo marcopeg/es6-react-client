@@ -9,7 +9,15 @@ const middlewares = [reduxThunk];
 var store;
 
 export function makeStore(initialState) {
-    var finalCreateStore = applyMiddleware(...middlewares)(createStore);
+
+    var finalCreateStore = compose(
+        applyMiddleware(...middlewares),
+        require('redux-devtools').devTools(),
+        require('redux-devtools').persistState(
+          window.location.href.match(/[?&]debug_session=([^&]+)\b/)
+        )
+    )(createStore);
+
     store = finalCreateStore(reducer, initialState);
     return store;
 }
