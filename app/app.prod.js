@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 import { Main } from 'utils/main';
 import { makeStore } from 'utils/store';
 
-import { App } from 'containers/app';
+import { App } from 'containers/App';
 import { initialState } from 'fixtures/initial-state-prod.fixture';
 
 export function start(targetEl, payload) {
