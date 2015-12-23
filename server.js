@@ -40,9 +40,9 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
 
-app.use('/api', require('./specs/apis/login'));
-app.use('/api', require('./specs/apis/campaigns'));
-app.use('/api', require('./specs/apis/videos'));
+// app.use('/api', require('./specs/apis/login'));
+// app.use('/api', require('./specs/apis/campaigns'));
+// app.use('/api', require('./specs/apis/videos'));
 
 var server = app.listen((PORT+1), function() {
     var port = server.address().port;
