@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: [
-        './app/app.prod',
+        './app/client/app.prod',
     ],
     output: {
         path: path.join(__dirname, 'dist'),
@@ -24,8 +24,8 @@ module.exports = {
         extensions: ['', '.js'],
         modulesDirectories: [
             'node_modules',
-            path.join(__dirname, 'app'),
-            path.join(__dirname, 'specs'),
+            path.join(__dirname, 'app', 'client'),
+            path.join(__dirname, 'app', 'tests'),
         ],
     },
     externals: {
