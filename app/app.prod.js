@@ -15,12 +15,12 @@ import { App } from 'containers/App';
 import { initialState } from 'fixtures/initial-state-prod.fixture';
 
 export function start(targetEl, payload) {
-    
-    // apply the host's page payload 
+
+    // apply the host's page payload
     if (payload.title) {
         initialState.app.title = payload.title;
     }
-    
+
     ReactDOM.render((
         <Main
             app={App}

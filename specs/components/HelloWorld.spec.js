@@ -24,7 +24,7 @@ describe('HelloWorld Component', () => {
         it('should render as ' + tag, function() {
             var cmp = ReactTestUtils.renderIntoDocument(<HelloWorld content="foo" tag={tag} />);
             var nod = ReactDOM.findDOMNode(cmp).querySelector(tag);
-            expect(nod.innerText).to.equal('foo');     
+            expect(nod.innerText).to.equal('foo');
         });
     });
 

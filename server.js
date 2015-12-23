@@ -19,10 +19,13 @@ new WebpackDevServer(webpack(config), {
         colors: true,
     },
     proxy: {
-        '/api*' : 'http://' + PROXY_HOST + ':' + PROXY_PORT + '/',
+        '/api*': 'http://' + PROXY_HOST + ':' + PROXY_PORT + '/',
     },
 }).listen(PORT, HOST, function(err) {
-    if (err) { console.log(err); }
+    if (err) {
+        console.log(err);
+    }
+
     console.log('Listening at localhost:' + PORT);
 });
 
@@ -40,11 +43,10 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
 
-app.use('/api', require('./specs/apis/login'));
-app.use('/api', require('./specs/apis/campaigns'));
-app.use('/api', require('./specs/apis/videos'));
+// list here the apis you plan to use
+app.use('/api', require('./specs/apis/foo'));
 
-var server = app.listen((PORT+1), function() {
+var server = app.listen((PORT + 1), function() {
     var port = server.address().port;
     console.log('Fake API /dist available at http://%s:%s', PROXY_HOST, PROXY_PORT);
 });
