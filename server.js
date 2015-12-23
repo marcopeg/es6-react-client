@@ -46,8 +46,8 @@ var app = express();
 app.use(bodyParser.json());
 
 // list here the apis you plan to use
-fs.readdirSync(path.join(__dirname, 'apis')).forEach(function(api) {
-    app.use('/api', require('./apis/' + api));
+fs.readdirSync(path.join(__dirname, 'app', 'server')).forEach(function(api) {
+    app.use('/api', require('./app/server/' + api));
 });
 
 var server = app.listen((PORT + 1), function() {

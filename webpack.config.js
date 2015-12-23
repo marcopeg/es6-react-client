@@ -7,12 +7,12 @@ module.exports = {
         app: [
             'webpack-dev-server/client?http://localhost:3000',
             'webpack/hot/only-dev-server',
-            './app/app.dev',
+            './app/client/app.dev',
         ],
         guide: [
             'webpack-dev-server/client?http://localhost:3000',
             'webpack/hot/only-dev-server',
-            './guide/index',
+            './app/styleguide/index',
         ],
     },
     output: {
@@ -29,8 +29,8 @@ module.exports = {
         extensions: ['', '.js'],
         modulesDirectories: [
             'node_modules',
-            path.join(__dirname, 'app'),
-            path.join(__dirname, 'specs'),
+            path.join(__dirname, 'app', 'client'),
+            path.join(__dirname, 'app', 'tests'),
         ],
     },
     module: {

@@ -13,7 +13,7 @@ import ReactDOM from 'react-dom';
 
 // Import here the component you are working on:
 import GuideComponent from './components/HelloWorld.guide';
-require('../app/index.scss');
+require('../client/index.scss');
 require('./index.scss');
 
 ReactDOM.render((<GuideComponent />), document.getElementById('app'));
