@@ -39,12 +39,16 @@ new WebpackDevServer(webpack(config), {
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
+var fs = require('fs');
 
 var app = express();
 app.use(bodyParser.json());
 
 // list here the apis you plan to use
-app.use('/api', require('./specs/apis/foo'));
+fs.readdirSync(path.join(__dirname, 'apis')).forEach(function(api) {
+    app.use('/api', require('./apis/' + api));
+});
 
 var server = app.listen((PORT + 1), function() {
     var port = server.address().port;
