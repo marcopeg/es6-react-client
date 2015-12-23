@@ -1,86 +1,38 @@
 var path = require('path');
 var webpack = require('webpack');
+var config = require('./webpack.config');
 
-module.exports = {
-    entry: [
-        './app/client/app.prod',
-    ],
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'app.min.js',
-        publicPath: '/',
-        library: 'app',
-    },
-    plugins: [
-        new webpack.NoErrorsPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-            },
-        }),
-    ],
-    resolve: {
-        extensions: ['', '.js'],
-        modulesDirectories: [
-            'node_modules',
-            path.join(__dirname, 'app', 'client'),
-            path.join(__dirname, 'app', 'tests'),
-        ],
-    },
-    externals: {
-        react: 'React',
-        'react-dom': 'ReactDOM',
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.js$/,
-                loaders: [
-                    'babel?' + [
-                        'optional[]=es7.classProperties',
-                        'optional[]=es7.decorators',
-                    ].join('&'),
-                ],
-                exclude: /node_modules/,
-                include: __dirname,
-            },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader',
-            },
-            {
-                test: /\.scss$/,
-                loaders: ['style', 'css', 'sass'],
-            },
-            {
-                test: /\.less$/,
-                loaders: ['style', 'css', 'less'],
-            },
-            {
-                test: /\.(jpe?g|png|gif|svg)$/i,
-                loader: 'url!img?optimizationLevel=7',
-            },
-            {
-                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?mimetype=application/font-woff',
-            },
-            {
-                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?mimetype=application/font-woff',
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?mimetype=application/octet-stream',
-            },
-            {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?mimetype=application/vnd.ms-fontobject',
-            },
-            {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?mimetype=image/svg+xml',
-            },
-        ],
-    },
+
+config.entry = ['./app/client/app.prod'];
+
+config.output.filename = 'app.min.js';
+config.output.path = path.join(__dirname, 'dist');
+
+config.externals = {
+    react: 'React',
+    'react-dom': 'ReactDOM',
 };
+
+config.plugins = [
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+        compress: {
+            warnings: false,
+        },
+    }),
+];
+
+// remove hot loading from the transpiler
+config.module.loaders = config.module.loaders.map(function(loader) {
+    if (loader.test.toString().indexOf('.js$') !== -1) {
+        loader.loaders.shift();
+    }
+
+    return loader;
+});
+
+// disable sourcemaps
+config.devtool = null;
+
+module.exports = config;
