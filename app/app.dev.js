@@ -16,7 +16,7 @@ import { DEV as initialState } from 'fixtures/initial-state-dev.fixture';
 
 export function start(targetEl, payload) {
 
-    // apply the host's page payload 
+    // apply the host's page payload
     if (payload.title) {
         initialState.app.title = payload.title;
     }

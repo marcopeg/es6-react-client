@@ -9,8 +9,9 @@ export function loadCampaigns() {
         .set('Accept', 'application/json')
         .end((err, res) => {
             if (err) {
-                return alert("It was not possible to load campaigns");
+                return alert('It was not possible to load campaigns');
             }
+
             dispatch(setCampaigns(res.body));
             console.log(err, res.body);
         });
