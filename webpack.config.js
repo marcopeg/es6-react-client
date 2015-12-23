@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var appEnv = require('./app/env');
 
 module.exports = {
     devtool: 'sourcemaps',
@@ -24,6 +25,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
+        new webpack.DefinePlugin(appEnv),
     ],
     resolve: {
         extensions: ['', '.js'],
