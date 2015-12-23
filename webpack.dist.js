@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var config = require('./webpack.config');
-
+var appEnv = require('./app/env');
 
 config.entry = ['./app/client/app.prod'];
 
@@ -14,8 +14,7 @@ config.externals = {
 };
 
 config.plugins = [
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
+    new webpack.DefinePlugin(appEnv),
     new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false,

@@ -1,5 +1,6 @@
 node_modules
 bower_components
+app/env.local.js
 dist/app.js
 dist/app.js.map
 dist/guide.js
