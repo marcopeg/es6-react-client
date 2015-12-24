@@ -20,12 +20,46 @@ export class Main extends React.Component {
         store: null,
     }
 
+    state = {
+        showDebug: false,
+    }
+
+
+    componentWillMount() {
+        try {
+            var initialState = JSON.parse(sessionStorage.getItem('redux-devtools'));
+            this.setState(initialState || {});
+        } catch (e) {}
+    }
+
+    componentDidMount() {
+        document.body.addEventListener('keyup', e => {
+            if (e.ctrlKey || e.altKey) {
+                switch (e.keyCode) {
+                    case 27: // esc
+                    case 32: // space
+                    case 68: // d
+                        this.setState({showDebug: !this.state.showDebug});
+                        break;
+                }
+            }
+        });
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        sessionStorage.setItem('redux-devtools', JSON.stringify(nextState));
+    }
+
+
     render() {
+
+        var { showDebug } = this.state;
+
         return (
             <Provider store={this.props.store}>
                 <div>
                     {React.createElement(this.props.app)}
-                    <DevTools />
+                    {showDebug ? <DevTools /> : null}
                 </div>
             </Provider>
         );
