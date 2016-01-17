@@ -46,9 +46,13 @@ var app = express();
 app.use(bodyParser.json());
 
 // list here the apis you plan to use
-fs.readdirSync(path.join(__dirname, 'app', 'server')).forEach(function(api) {
-    app.use('/api', require('./app/server/' + api));
-});
+fs.readdirSync(path.join(__dirname, 'app', 'server'))
+    .filter(i => i.substr(0, 1) !== '.')
+    .filter(i => i.substr(0, 1) !== '_')
+    .forEach(function(api) {
+        app.use('/api', require('./app/server/' + api));
+    }
+);
 
 var server = app.listen((PORT + 1), function() {
     var port = server.address().port;
