@@ -2,13 +2,13 @@
 // Generated on Tue Sep 15 2015 15:29:03 GMT+0200 (CEST)
 
 var webpackConfig = require('./webpack.config.js');
-delete(webpackConfig.entry);
-delete(webpackConfig.output);
-delete(webpackConfig.plugins);
-delete(webpackConfig.devtool);
+delete (webpackConfig.entry);
+delete (webpackConfig.output);
+delete (webpackConfig.plugins);
+delete (webpackConfig.devtool);
 webpackConfig.module.loaders[0].loaders.splice(0, 1);
 
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -58,7 +58,8 @@ module.exports = function(config) {
 
 
         // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN ||
+        // config.LOG_INFO || config.LOG_DEBUG
         logLevel: config.LOG_INFO,
 
 

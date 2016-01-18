@@ -3,7 +3,7 @@
  * Prevent body scroll on mobile
  */
 
-var defaultPrevent = function(e) {
+var defaultPrevent = function (e) {
     e.preventDefault();
 };
 

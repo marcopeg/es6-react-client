@@ -4,7 +4,7 @@ export const INITIAL_STATE = {
 };
 
 export function appReducer(state = INITIAL_STATE, action) {
-    var { type, payload } = action;
+    var { type } = action;
     switch (type) {
         default: return state;
     }

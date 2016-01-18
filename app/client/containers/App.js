@@ -7,6 +7,11 @@ import { HelloWorld } from 'components/HelloWorld';
 
 @connect(s => s.app)
 export class App extends React.Component {
+
+    static propTypes = {
+        title: React.PropTypes.string,
+    }
+
     render() {
         return (
             <Grid>

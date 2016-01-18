@@ -3,7 +3,7 @@
  * app startup script for production purpose
  */
 
-console.log('ENV_PROP:', ENV_PROP);
+// console.log('ENV_PROP:', ENV_PROP);
 
 require('./index.scss');
 
