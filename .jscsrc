@@ -1,8 +1,0 @@
-{
-    "esprima": "esprima-fb",
-    "fileExtensions": [".js", ".jsx"],
-	"preset": "airbnb",
-    "excludeFiles": ["node_modules/**", "dist/**"],
-	"validateIndentation": 4,
-	"disallowMultipleLineBreaks": null
-}

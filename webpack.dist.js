@@ -23,7 +23,7 @@ config.plugins = [
 ];
 
 // remove hot loading from the transpiler
-config.module.loaders = config.module.loaders.map(function(loader) {
+config.module.loaders = config.module.loaders.map(function (loader) {
     if (loader.test.toString().indexOf('.js$') !== -1) {
         loader.loaders.shift();
     }

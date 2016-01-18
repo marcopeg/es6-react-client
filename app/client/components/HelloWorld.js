@@ -1,11 +1,12 @@
 
 import React from 'react';
-import Grid from 'react-bootstrap/lib/Grid';
 
 export class HelloWorld extends React.Component {
 
     static propTypes = {
         tag: React.PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+        content: React.PropTypes.string,
+        children: React.PropTypes.element,
     }
 
     static defaultProps = {
@@ -14,8 +15,8 @@ export class HelloWorld extends React.Component {
     }
 
     render() {
-        var { content, tag } = this.props;
-        content = content || this.props.children;
+        var { content, tag, children } = this.props;
+        content = content || children;
 
         content = React.createElement(tag, null, content);
 

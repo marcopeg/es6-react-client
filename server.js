@@ -3,7 +3,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
-var pkg = require('./package.json');
+// var pkg = require('./package.json');
 
 var HOST = '0.0.0.0';
 var PORT = 3000;
@@ -21,14 +21,13 @@ new WebpackDevServer(webpack(config), {
     proxy: {
         '/api*': 'http://' + PROXY_HOST + ':' + PROXY_PORT + '/',
     },
-}).listen(PORT, HOST, function(err) {
+}).listen(PORT, HOST, function (err) {
     if (err) {
         console.log(err);
     }
 
     console.log('Listening at localhost:' + PORT);
 });
-
 
 
 
@@ -49,12 +48,12 @@ app.use(bodyParser.json());
 fs.readdirSync(path.join(__dirname, 'app', 'server'))
     .filter(i => i.substr(0, 1) !== '.')
     .filter(i => i.substr(0, 1) !== '_')
-    .forEach(function(api) {
+    .forEach(function (api) {
         app.use('/api', require('./app/server/' + api));
     }
 );
 
-var server = app.listen((PORT + 1), function() {
-    var port = server.address().port;
+app.listen((PORT + 1), function () {
+    // var port = server.address().port;
     console.log('Fake API /dist available at http://%s:%s', PROXY_HOST, PROXY_PORT);
 });

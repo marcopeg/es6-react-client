@@ -9,8 +9,8 @@ import { makeStore } from 'utils/store';
 import { App } from 'containers/App';
 import { initialState } from 'fixtures/initial-state-prod.fixture';
 
-describe('App Container', function() {
-    it('should render home screen', function() {
+describe('App Container', function () {
+    it('should render home screen', function () {
         var cmp = ReactTestUtils.renderIntoDocument((
             <Provider store={makeStore(initialState)}>
                 <App />
