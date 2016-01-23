@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "./node_modules/nodemon/bin/nodemon.js server.js",
+    "guide": "./node_modules/nodemon/bin/nodemon.js server.js --guide",
     "build": "node ./node_modules/webpack/bin/webpack",
     "dist": "node ./node_modules/webpack/bin/webpack --config webpack.dist.js",
     "test": "karma start",
     "app": "npm run dist && ./node_modules/http-server/bin/http-server ./dist -p 3000",
-    "deploy": "npm install && npm run dist && firebase deploy",
     "lint": "./node_modules/eslint/bin/eslint.js ./"
   },
   "author": "",
@@ -40,6 +40,7 @@
     "karma-webpack": "^1.7.x",
     "mocha": "^2.3.x",
     "node-sass": "^3.4.x",
+    "nodemon": "^1.8.1",
     "phantomjs": "^1.9.x",
     "react": "^0.14.3",
     "react-addons-test-utils": "^0.14.3",

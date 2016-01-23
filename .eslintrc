@@ -7,7 +7,8 @@
     "env" : {
         "browser": true,
         "node": true,
-        "es6": true
+        "es6": true,
+        "mocha": true,
     },
     "plugins" : [
         "nodeca",
@@ -233,11 +234,7 @@
         "strict" : [2, "never"] // strict mode is provided by babel
     },
     "globals": {
-        "describe": true,
-        "it": true,
         "expect": true,
-        "beforeEach": true,
-        "afterEach": true,
         "sinon": true
     }
 }
