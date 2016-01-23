@@ -1,9 +1,17 @@
-
+/**
+ * Development Server
+ */
 
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
-// var pkg = require('./package.json');
+
+// start the styleguide or the full app
+var config;
+if (process.argv.join(' ').indexOf('--guide') === -1) {
+    config = require('./webpack.config');
+} else {
+    config = require('./webpack.config.guide');
+}
 
 var HOST = '0.0.0.0';
 var PORT = 3000;
@@ -19,7 +27,7 @@ new WebpackDevServer(webpack(config), {
         colors: true,
     },
     proxy: {
-        '/api*': 'http://' + PROXY_HOST + ':' + PROXY_PORT + '/',
+        '/foo*': 'http://' + PROXY_HOST + ':' + PROXY_PORT + '/',
     },
 }).listen(PORT, HOST, function (err) {
     if (err) {
@@ -33,7 +41,9 @@ new WebpackDevServer(webpack(config), {
 
 
 /**
- * Fake API
+ * Local Express API
+ * this piece of code will start an Express project that fetches
+ * router rules fom `/app/server`.
  */
 
 var express = require('express');
@@ -49,11 +59,10 @@ fs.readdirSync(path.join(__dirname, 'app', 'server'))
     .filter(i => i.substr(0, 1) !== '.')
     .filter(i => i.substr(0, 1) !== '_')
     .forEach(function (api) {
-        app.use('/api', require('./app/server/' + api));
+        app.use('/' + api.replace('.js', ''), require('./app/server/' + api));
     }
 );
 
-app.listen((PORT + 1), function () {
-    // var port = server.address().port;
+app.listen((PROXY_PORT), function () {
     console.log('Fake API /dist available at http://%s:%s', PROXY_HOST, PROXY_PORT);
 });

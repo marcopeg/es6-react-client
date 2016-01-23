@@ -6,7 +6,11 @@ export class HelloWorld extends React.Component {
     static propTypes = {
         tag: React.PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
         content: React.PropTypes.string,
-        children: React.PropTypes.element,
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.string,
+            React.PropTypes.number,
+        ]),
     }
 
     static defaultProps = {

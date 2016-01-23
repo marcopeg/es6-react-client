@@ -10,11 +10,6 @@ module.exports = {
             'webpack/hot/only-dev-server',
             './app/client/app.dev',
         ],
-        guide: [
-            'webpack-dev-server/client?http://localhost:3000',
-            'webpack/hot/only-dev-server',
-            './app/styleguide/index',
-        ],
     },
     output: {
         path: path.join(__dirname, 'dist'),
