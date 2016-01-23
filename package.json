@@ -10,7 +10,6 @@
     "dist": "node ./node_modules/webpack/bin/webpack --config webpack.dist.js",
     "test": "karma start",
     "app": "npm run dist && ./node_modules/http-server/bin/http-server ./dist -p 3000",
-    "deploy": "npm install && npm run dist && firebase deploy",
     "lint": "./node_modules/eslint/bin/eslint.js ./"
   },
   "author": "",
