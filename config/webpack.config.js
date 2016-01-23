@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var appEnv = require('./app/env');
+var appEnv = require('../app/env');
 
 module.exports = {
     devtool: 'sourcemaps',
@@ -8,11 +8,11 @@ module.exports = {
         app: [
             'webpack-dev-server/client?http://localhost:3000',
             'webpack/hot/only-dev-server',
-            './app/client/app.dev',
+            path.join(process.cwd(), 'app/client/app.dev'),
         ],
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(process.cwd(), 'dist'),
         filename: '[name].js',
         publicPath: '/',
         library: 'app',
@@ -26,8 +26,8 @@ module.exports = {
         extensions: ['', '.js'],
         modulesDirectories: [
             'node_modules',
-            path.join(__dirname, 'app', 'client'),
-            path.join(__dirname, 'app', 'tests'),
+            path.join(process.cwd(), 'app', 'client'),
+            path.join(process.cwd(), 'app', 'tests'),
         ],
     },
     module: {
@@ -42,7 +42,7 @@ module.exports = {
                     ].join('&'),
                 ],
                 exclude: /node_modules/,
-                include: __dirname,
+                include: process.cwd(),
             },
             {
                 test: /\.json$/,

@@ -32,9 +32,9 @@ var isStyleguide = process.argv.join(' ').indexOf('--guide') !== -1;
 
 var webpackConfig;
 if (isStyleguide) {
-    webpackConfig = require('./webpack.config.guide');
+    webpackConfig = require('./config/webpack.config.guide');
 } else {
-    webpackConfig = require('./webpack.config');
+    webpackConfig = require('./config/webpack.config');
 }
 
 
