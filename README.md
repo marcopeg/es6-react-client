@@ -40,6 +40,21 @@ _(*) In case of errors it shows an horrible NPM related error trace which is com
 
 ## Testing
 
+The testing environment is based on `KarmaJS` and requires some packages that are not installed by default.
+
+```
+// install test suite modules
+npm run setup-ci
+```
+
+Single run test:
+
 ```
 npm test
+```
+
+Continuous Integration: it runs the tests and watch for changes in the source code:
+
+```
+npm run ci
 ```
