@@ -79,7 +79,7 @@ function proxyTable(host, port) {
 function proxyGuideEntryPoint() {
     return {
         bypass: function () {
-            return isStyleguide ? '/guide.html' : '/client.html';
+            return isStyleguide ? '/config/guide.html' : '/config/client.html';
         },
     };
 }
