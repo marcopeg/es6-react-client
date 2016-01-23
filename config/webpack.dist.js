@@ -1,12 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
 var config = require('./webpack.config');
-var appEnv = require('./app/env');
+var appEnv = require('../app/env');
 
 config.entry = ['./app/client/app.prod'];
 
 config.output.filename = 'app.min.js';
-config.output.path = path.join(__dirname, 'dist');
+config.output.path = path.join(process.cwd(), 'dist');
 
 config.externals = {
     react: 'React',
