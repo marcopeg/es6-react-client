@@ -5,8 +5,9 @@ var webpackConfig = require('./webpack.config.js');
 delete (webpackConfig.entry);
 delete (webpackConfig.output);
 delete (webpackConfig.plugins);
-delete (webpackConfig.devtool);
-webpackConfig.module.loaders[0].loaders.splice(0, 1);
+
+webpackConfig.devtool = 'inline-source-map';
+webpackConfig.module.loaders[0].loaders = ['babel'];
 
 module.exports = function (config) {
     config.set({
@@ -34,7 +35,7 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            '../app/tests/**/*.spec.js': ['webpack'],
+            '../app/tests/**/*.spec.js': ['webpack', 'sourcemap'],
         },
 
         webpack: webpackConfig,

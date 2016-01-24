@@ -7,12 +7,31 @@ module.exports = function (config) {
 
     var webpackConfig = config.webpack;
 
+    // -- doesn't really work yet
+    // webpackConfig.module.postLoaders = [
+    //     {
+    //         test: /\.js$/,
+    //         loader: 'isparta',
+    //         exclude: /(node_modules|bower_components)/,
+    //         include: path.join(process.cwd(), 'app', 'client'),
+    //     },
+    // ];
+
+    // webpackConfig.isparta = {
+    //     embedSource: true,
+    //     noAutoWrap: true,
+    //     babel: webpackConfig.babel,
+    // };
+
+    // https://github.com/deepsweet/isparta-loader
+    // check this page for covering the real source code
+
     webpackConfig.module.postLoaders = [
         {
             test: /\.js$/,
-            loader: 'isparta',
+            loader: 'istanbul-instrumenter',
             exclude: /(tests|node_modules|bower_components)/,
-            include: process.cwd(),
+            include: path.join(process.cwd(), 'app', 'client'),
         },
     ];
 
