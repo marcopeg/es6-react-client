@@ -22,16 +22,8 @@ config.plugins = [
     }),
 ];
 
-// remove hot loading from the transpiler
-config.module.loaders = config.module.loaders.map(function (loader) {
-    if (loader.test.toString().indexOf('.js$') !== -1) {
-        loader.loaders.shift();
-    }
-
-    return loader;
-});
-
-// disable sourcemaps
+// remove development tools
 config.devtool = null;
+config.module.loaders[0].loaders = ['babel'];
 
 module.exports = config;

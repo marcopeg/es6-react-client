@@ -6,3 +6,4 @@ dist/app.js
 dist/app.js.map
 dist/guide.js
 dist/guide.js.map
+test-coverage-report

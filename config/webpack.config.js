@@ -34,14 +34,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: [
-                    'react-hot',
-                    'babel?' + [
-                        'optional[]=es7.classProperties',
-                        'optional[]=es7.decorators',
-                    ].join('&'),
-                ],
-                exclude: /node_modules/,
+                loaders: ['react-hot', 'babel'],
+                exclude: /(node_modules|bower_components)/,
                 include: process.cwd(),
             },
             {
@@ -84,6 +78,12 @@ module.exports = {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?mimetype=image/svg+xml',
             },
+        ],
+    },
+    babel: {
+        optional: [
+            'es7.classProperties',
+            'es7.decorators',
         ],
     },
 };
