@@ -58,3 +58,20 @@ Continuous Integration: it runs the tests and watch for changes in the source co
 ```
 npm run ci
 ```
+
+## Test Coverage Report
+
+Test coverage requires few more dependecies to be installed:
+
+```
+npm run setup-cov
+```
+
+Then you can run:
+
+```
+npm run cov
+```
+
+
+
