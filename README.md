@@ -44,7 +44,7 @@ The testing environment is based on `KarmaJS` and requires some packages that ar
 
 ```
 // install test suite modules
-npm run setup-ci
+npm run setup-tdd
 ```
 
 Single run test:
@@ -56,7 +56,7 @@ npm test
 Continuous Integration: it runs the tests and watch for changes in the source code:
 
 ```
-npm run ci
+npm run tdd
 ```
 
 ## Test Coverage Report
