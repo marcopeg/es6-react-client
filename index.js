@@ -9,7 +9,7 @@ var webpackConfig = require('./config/webpack.config');
 var serverCfg = require('./config/server.conf');
 
 // detect the request to run the styleguide
-var isStyleguide = process.argv.join(' ').indexOf('--guide') !== -1;
+var isStyleguide = process.argv.join(' ').indexOf('guide') !== -1;
 
 // load styleguide speciific configuration
 if (isStyleguide) {
