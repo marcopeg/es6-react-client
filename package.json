@@ -1,12 +1,11 @@
 {
   "name": "react-client",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js index.js",
     "test": "./node_modules/karma/bin/karma start ./config/karma.conf.js",
-    "guide": "./node_modules/nodemon/bin/nodemon.js index.js --guide",
     "build": "node ./node_modules/webpack/bin/webpack --config config/webpack.dist.js",
     "build:dev": "node ./node_modules/webpack/bin/webpack --config config/webpack.config.js",
     "app": "npm run build && ./node_modules/http-server/bin/http-server ./dist -p 3000",
