@@ -1,6 +1,8 @@
 # React Client
 
-> Starter kit to buid `React/Redux` based _Single Page Apps_.
+> Starter kit to buid `React/Redux` based _Single Page Apps_.  
+> You can easily create new apps based on this project by using the
+> [Yeoman Reapp Generator](https://github.com/marcopeg/generator-reapp).
 
 ## First Setup
 
@@ -25,6 +27,19 @@ You can run the application in _production mode_ (minified bundle, without devel
 ```
 npm run app
 ```
+
+## Run a Single Component: the Styleguide
+
+During the development of a single component it is useful to run a mini-app in which to test controlled versions of that specific component.
+
+This can be acheved by creating a _Styleguide Page_ for the component and running it with the following command:
+
+```
+npm start ComponentName
+```
+
+> Use `yo reapp:component` to easily scaffold a new component and it's _Styleguide_ page.  
+> [more info here](https://github.com/marcopeg/generator-reapp)
 
 ## Code Quality (eslint)
 

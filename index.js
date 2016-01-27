@@ -2,35 +2,43 @@
  * Development Server
  */
 
+var fs = require('fs');
+var path = require('path');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
+var express = require('express');
+var bodyParser = require('body-parser');
 
 var webpackConfig = require('./config/webpack.config');
 var serverCfg = require('./config/server.conf');
+var appEnv = require('./app/env');
 
 // detect the request to run the styleguide
-var isStyleguide = process.argv.join(' ').indexOf('guide') !== -1;
+var runComponent = process.argv[process.argv.length - 1];
+var runComponentFile = runComponent + '.guide.js';
+var runComponentPath = path.join(__dirname, 'app', 'styleguide', 'components', runComponentFile);
 
-// load styleguide speciific configuration
-if (isStyleguide) {
+if (fs.existsSync(runComponentPath)) {
     webpackConfig = require('./config/webpack.config.guide');
-    var appEnv = require('./app/env');
-
-    var args = process.argv.slice(3);
-    if (args.length) {
-        appEnv.__STYLEGUIDE_COMPONENT__ = JSON.stringify(args[0]);
-    } else {
-        appEnv.__STYLEGUIDE_COMPONENT__ = JSON.stringify('--no-component--');
-    }
-
+    appEnv.__STYLEGUIDE_COMPONENT__ = JSON.stringify(runComponent);
     webpackConfig.plugins.map(function (plugin) {
         if (plugin instanceof webpack.DefinePlugin) {
             return new webpack.DefinePlugin(appEnv);
         }
         return plugin;
     });
+// the styleguide should put together all the components!
+} else if (runComponent === 'styleguide') {
+    console.log('###');
+    console.log('### Styleguide will be available soon');
+    console.log('### run a single component styleguide by:');
+    console.log('###');
+    console.log('###     npm start ComponentName');
+    console.log('###');
+    runComponent = null;
+} else {
+    runComponent = null;
 }
-
 
 new WebpackDevServer(webpack(webpackConfig), {
     publicPath: webpackConfig.output.publicPath,
@@ -47,7 +55,7 @@ new WebpackDevServer(webpack(webpackConfig), {
 
     console.log('Listening at localhost:' + serverCfg.port);
 
-    if (serverCfg.proxyIsEnabled && !isStyleguide) {
+    if (serverCfg.proxyIsEnabled && !runComponent) {
         runLocalAPI();
     }
 });
@@ -72,7 +80,7 @@ function proxyTable(host, port) {
 function proxyGuideEntryPoint() {
     return {
         bypass: function () {
-            return isStyleguide ? '/config/guide.html' : '/config/client.html';
+            return runComponent ? '/config/guide.html' : '/config/client.html';
         },
     };
 }
@@ -85,12 +93,6 @@ function proxyGuideEntryPoint() {
  */
 
 function runLocalAPI() {
-
-    var express = require('express');
-    var bodyParser = require('body-parser');
-    var path = require('path');
-    var fs = require('fs');
-
     var app = express();
     app.use(bodyParser.json());
 
