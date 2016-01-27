@@ -27,7 +27,7 @@ export class HelloWorld extends React.Component {
         ));
 
         return (
-            <div>
+            <div className="hello-world">
                 {content}
             </div>
         );
