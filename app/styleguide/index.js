@@ -11,7 +11,7 @@
  * The above command will start a web server that renders your componet guide.
  */
 
-/* globals __STYLEGUIDE_COMPONENT__ */
+/* globals __STYLEGUIDE_COMPONENT__ __STYLEGUIDE_COMPONENTS__ */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -55,11 +55,40 @@ class ErrorComponent extends React.Component {
 }
 
 var styleguideContent;
-try {
-    var GuideComponent = require('./components/' + __STYLEGUIDE_COMPONENT__ + '.guide');
-    styleguideContent = <GuideComponent />;
-} catch (e) {
-    styleguideContent = <ErrorComponent message={e.message} />;
+var tryToRenderComponentPage = true;
+var tryToRenderStyleguide = false;
+var renderInstructions = false;
+
+// try to render single component styleguide
+if (tryToRenderComponentPage) {
+    try {
+        var GuideComponent = require('./components/' + __STYLEGUIDE_COMPONENT__ + '.guide');
+        styleguideContent = <GuideComponent />;
+    } catch (e) {
+        tryToRenderStyleguide = true;
+    }
+}
+
+// try to render full styleguide
+if (tryToRenderStyleguide) {
+    try {
+        var styleguidePages = __STYLEGUIDE_COMPONENTS__.map(componentName => {
+            var componentDef = require('./components/' + componentName);
+            return React.createElement(componentDef, {
+                key: componentName,
+            });
+        });
+
+        styleguideContent = <div>{styleguidePages}</div>;
+
+    } catch (e) {
+        renderInstructions = true;
+    }
+}
+
+// render styleguide instructions
+if (renderInstructions) {
+    styleguideContent = <ErrorComponent message={'hoho'} />;
 }
 
 ReactDOM.render(styleguideContent, document.getElementById('app'));
