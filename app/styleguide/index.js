@@ -5,7 +5,8 @@
  * the component from the `app` folder and render it in all the possible ways.
  *
  * ```
- * npm run guide ComponentName
+ * npm start ComponentName
+ * npm start styleguide
  * ```
  *
  * The above command will start a web server that renders your componet guide.
@@ -31,9 +32,13 @@ class StyleguidePage extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>{this.props.name}</h1>
-                {this.props.children}
+            <div className="es6-reapp-styleguide-page">
+                <div className="es6-reapp-styleguide-page--title">
+                    <h4>{this.props.name}</h4>
+                </div>
+                <div className="es6-reapp-styleguide-page--body">
+                    {this.props.children}
+                </div>
             </div>
         );
     }
@@ -85,6 +90,73 @@ class ErrorComponent extends React.Component {
         );
     }
 }
+
+export class GuidePage extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.array,
+        ]),
+    }
+    render() {
+        return (
+            <div className="es6-reapp-styleguide-component-page">
+                {this.props.children}
+            </div>
+        );
+    }
+}
+
+export class GuideSectionHeader extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.string,
+        ]),
+    }
+    render() {
+        return (
+            <div className="es6-reapp-styleguide-section--header">
+                <h5>{this.props.children}</h5>
+            </div>
+        );
+    }
+}
+
+export class GuideSectionBody extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.element.isRequired,
+    }
+    render() {
+        return (
+            <div className="es6-reapp-styleguide-section--body">
+                {this.props.children}
+            </div>
+        );
+    }
+}
+
+export class GuideSection extends React.Component {
+    static propTypes = {
+        title: React.PropTypes.string,
+        children: React.PropTypes.element,
+    }
+    render() {
+        return (
+            <div className="es6-reapp-styleguide-section">
+                <GuideSectionHeader>{this.props.title}</GuideSectionHeader>
+                <GuideSectionBody>
+                    {this.props.children}
+                </GuideSectionBody>
+            </div>
+        );
+    }
+}
+
+
+/**
+ * Render the styleguide for real
+ */
 
 var GuideComponent;
 var styleguideContent;

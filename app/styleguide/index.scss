@@ -2,3 +2,43 @@
  * Style Guide
  * those styles are specific to the style guide project
  */
+
+$page-spacing: 10px;
+$page-background: #ddd;
+
+.es6-reapp-styleguide-page {
+    margin: $page-spacing * 2;
+    border: 1px solid $page-background;
+    border-radius: 3px;
+}
+
+.es6-reapp-styleguide-page--title {
+    padding: $page-spacing;
+    background: #C5E17F;
+}
+
+.es6-reapp-styleguide-page--body {
+    padding: $page-spacing;
+    margin-top: 0;
+    background: #fff;
+}
+
+.es6-reapp-styleguide-section {
+    margin-bottom: 40px;
+
+    &:last-child {
+        margin-bottom: 15;
+    }
+}
+
+.es6-reapp-styleguide-section--header {
+    padding: 0 10px;
+}
+
+.es6-reapp-styleguide-section--body {
+    border: 1px dotted #ddd;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 1px 1px 3px #eee;
+}
+
