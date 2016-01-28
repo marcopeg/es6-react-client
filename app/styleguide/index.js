@@ -19,37 +19,42 @@ import ReactDOM from 'react-dom';
 
 import Grid from 'react-bootstrap/lib/Grid';
 import Alert from 'react-bootstrap/lib/Alert';
+import Panel from 'react-bootstrap/lib/Panel';
+import PageHeader from 'react-bootstrap/lib/PageHeader';
 
 require('../client/index.scss');
 require('./index.scss');
 
-class StyleguidePage extends React.Component {
+class StyleguideTitle extends React.Component {
+    render() {
+        return (
+            <Grid>
+                <PageHeader>es6-react-client <small>Styleguide</small></PageHeader>
+            </Grid>
+        );
+    }
+}
 
+class StyleguidePage extends React.Component {
     static propTypes = {
         name: React.PropTypes.string.isRequired,
         children: React.PropTypes.element.isRequired,
     }
-
     render() {
         return (
-            <div className="es6-reapp-styleguide-page">
-                <div className="es6-reapp-styleguide-page--title">
-                    <h4>{this.props.name}</h4>
-                </div>
-                <div className="es6-reapp-styleguide-page--body">
+            <Grid style={{ marginTop: 10 }}>
+                <Panel header={this.props.name} bsStyle="primary">
                     {this.props.children}
-                </div>
-            </div>
+                </Panel>
+            </Grid>
         );
     }
 }
 
 class StyleguideIndex extends React.Component {
-
     static propTypes = {
         components: React.PropTypes.array.isRequired,
     }
-
     render() {
         return (
             <div>
@@ -100,7 +105,7 @@ export class GuidePage extends React.Component {
     }
     render() {
         return (
-            <div className="es6-reapp-styleguide-component-page">
+            <div>
                 {this.props.children}
             </div>
         );
@@ -115,8 +120,11 @@ export class GuideSectionHeader extends React.Component {
         ]),
     }
     render() {
+        var style = {
+            padding: '0 10px',
+        };
         return (
-            <div className="es6-reapp-styleguide-section--header">
+            <div style={style}>
                 <h5>{this.props.children}</h5>
             </div>
         );
@@ -128,8 +136,14 @@ export class GuideSectionBody extends React.Component {
         children: React.PropTypes.element.isRequired,
     }
     render() {
+        var style = {
+            border: '1px dotted #ddd',
+            borderRadius: 3,
+            padding: 10,
+            boxShadow: '1px 1px 3px #eee',
+        };
         return (
-            <div className="es6-reapp-styleguide-section--body">
+            <div style={style}>
                 {this.props.children}
             </div>
         );
@@ -142,8 +156,11 @@ export class GuideSection extends React.Component {
         children: React.PropTypes.element,
     }
     render() {
+        var style = {
+            marginBottom: 40,
+        };
         return (
-            <div className="es6-reapp-styleguide-section">
+            <div style={style}>
                 <GuideSectionHeader>{this.props.title}</GuideSectionHeader>
                 <GuideSectionBody>
                     {this.props.children}
@@ -169,9 +186,12 @@ if (tryToRenderComponentPage) {
     try {
         GuideComponent = require('./components/' + __STYLEGUIDE_COMPONENT__ + '.guide');
         styleguideContent = (
-            <StyleguidePage name={__STYLEGUIDE_COMPONENT__}>
-                <GuideComponent />
-            </StyleguidePage>
+            <div>
+                <StyleguideTitle />
+                <StyleguidePage name={__STYLEGUIDE_COMPONENT__}>
+                    <GuideComponent />
+                </StyleguidePage>
+            </div>
         );
     } catch (e) {
         tryToRenderStyleguide = true;
@@ -190,7 +210,12 @@ if (tryToRenderStyleguide) {
             );
         });
 
-        styleguideContent = <StyleguideIndex components={components} />;
+        styleguideContent = (
+            <div>
+                <StyleguideTitle />
+                <StyleguideIndex components={components} />
+            </div>
+        );
     } catch (e) {
         renderInstructions = true;
     }
