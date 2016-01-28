@@ -26,6 +26,8 @@ import Alert from 'react-bootstrap/lib/Alert';
 import Panel from 'react-bootstrap/lib/Panel';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 import Button from 'react-bootstrap/lib/Button';
+import ListGroup from 'react-bootstrap/lib/ListGroup';
+import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 
 require('../client/index.scss');
 require('./index.scss');
@@ -54,32 +56,30 @@ class StyleguidePage extends React.Component {
             'components',
             componentFile,
         ].join('/');
-        var header = (
+        var header = this.props.name;
+        var footer = (
             <div>
-                {this.props.name}<br />
+                <Button
+                    href="#top"
+                    bsStyle="link"
+                    style={{ marginTop: -10 }}
+                    className="pull-right">Back to top</Button>
+                <small>
+                    <code
+                        style={{ background: 'transparent' }}
+                        children={componentPath} />
+                </small>
             </div>
         );
-        var footer = (
-            <small><code style={{
-                background: 'transparent',
-            }}>{componentPath}</code></small>
-        );
-
-        var children = React.Children.map(this.props.children, item => {
-            return item;
-            // console.log(item);
-            // return React.cloneElement(item, {
-            //     componentName: this.props.name,
-            //     componentFile: componentFile,
-            //     componentPath: componentPath,
-            // });
-        });
 
         return (
-            <Grid style={{ marginTop: 10 }}>
-                <Panel header={header} footer={footer} bsStyle="primary">
-                    {children}
-                </Panel>
+            <Grid id={this.props.name + '.guide'}>
+                <Panel
+                    header={header}
+                    footer={footer}
+                    bsStyle="primary"
+                    style={{ marginTop: 10 }}
+                    children={this.props.children}>
             </Grid>
         );
     }
@@ -90,11 +90,32 @@ class StyleguideIndex extends React.Component {
         components: React.PropTypes.array.isRequired,
     }
     render() {
-        // console.log(__STYLEGUIDE_SOURCES__);
         return (
             <div>
                 {this.props.components}
             </div>
+        );
+    }
+}
+
+class StyleguideToc extends React.Component {
+    static propTypes = {
+        components: React.PropTypes.array.isRequired,
+    }
+    render() {
+        var components = this.props.components.map(name => {
+            return (
+                <ListGroupItem key={name} href={'#' + name}>
+                    {name}
+                </ListGroupItem>
+            );
+        });
+        return (
+            <Grid>
+                <Panel bsStyle="success" header="Table of Contents">
+                    <ListGroup fill>{components}</ListGroup>
+                </Panel>
+            </Grid>
         );
     }
 }
@@ -314,6 +335,7 @@ if (tryToRenderStyleguide) {
         styleguideContent = (
             <div>
                 <StyleguideTitle />
+                <StyleguideToc components={__STYLEGUIDE_COMPONENTS__} />
                 <StyleguideIndex components={components} />
             </div>
         );
