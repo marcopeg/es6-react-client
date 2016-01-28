@@ -14,30 +14,61 @@ var serverCfg = require('./config/server.conf');
 var appEnv = require('./app/env');
 
 // detect the request to run the styleguide
+var isStyleguide;
 var runComponent = process.argv[process.argv.length - 1];
 var runComponentFile = runComponent + '.guide.js';
 var runComponentPath = path.join(__dirname, 'app', 'styleguide', 'components', runComponentFile);
 
+// Styleguide: single component
+var sources = [];
 if (fs.existsSync(runComponentPath)) {
+    isStyleguide = true;
     webpackConfig = require('./config/webpack.config.guide');
     appEnv.__STYLEGUIDE_COMPONENT__ = JSON.stringify(runComponent);
+
+    // export styleguide sources;
+    try {
+        sources = [getGuideSourceCode(runComponentPath)];
+    } catch (e) {
+        sources = [];
+    }
+    appEnv.__STYLEGUIDE_SOURCES__ = JSON.stringify(sources);
+
+// Styleguide: full
+} else if (runComponent === 'styleguide') {
+    isStyleguide = true;
+    webpackConfig = require('./config/webpack.config.guide');
+    var styleguideFolder = path.join(
+        __dirname,
+        'app',
+        'styleguide',
+        'components'
+    );
+
+    var files = fs.readdirSync(styleguideFolder).filter(function (fileName) {
+        return fileName.indexOf('.guide') !== -1;
+    }).map(function (fileName) {
+        var filePath = path.join(__dirname, 'app', 'styleguide', 'components', fileName);
+        try {
+            sources.push(getGuideSourceCode(filePath));
+        } catch (e) {
+            console.log('Error generating styleguide sources for:', filePath);
+        }
+        return fileName.replace('.js', '');
+    });
+
+    appEnv.__STYLEGUIDE_COMPONENTS__ = JSON.stringify(files);
+    appEnv.__STYLEGUIDE_SOURCES__ = JSON.stringify(sources);
+}
+
+if (isStyleguide) {
+    appEnv.__STYLEGUIDE_ROOT__ = JSON.stringify(path.resolve(__dirname));
     webpackConfig.plugins.map(function (plugin) {
         if (plugin instanceof webpack.DefinePlugin) {
             return new webpack.DefinePlugin(appEnv);
         }
         return plugin;
     });
-// the styleguide should put together all the components!
-} else if (runComponent === 'styleguide') {
-    console.log('###');
-    console.log('### Styleguide will be available soon');
-    console.log('### run a single component styleguide by:');
-    console.log('###');
-    console.log('###     npm start ComponentName');
-    console.log('###');
-    runComponent = null;
-} else {
-    runComponent = null;
 }
 
 new WebpackDevServer(webpack(webpackConfig), {
@@ -55,7 +86,7 @@ new WebpackDevServer(webpack(webpackConfig), {
 
     console.log('Listening at localhost:' + serverCfg.port);
 
-    if (serverCfg.proxyIsEnabled && !runComponent) {
+    if (serverCfg.proxyIsEnabled && !isStyleguide) {
         runLocalAPI();
     }
 });
@@ -80,7 +111,7 @@ function proxyTable(host, port) {
 function proxyGuideEntryPoint() {
     return {
         bypass: function () {
-            return runComponent ? '/config/guide.html' : '/config/client.html';
+            return isStyleguide ? '/config/guide.html' : '/config/client.html';
         },
     };
 }
@@ -112,4 +143,37 @@ function runLocalAPI() {
             serverCfg.proxyPort
         );
     });
+}
+
+function getGuideSourceCode(filePath) {
+    var source = fs.readFileSync(filePath, 'utf-8');
+
+    var sections = source.match(/<GuideSection(.|\n)*?<\/GuideSection>/g).map(function (section) {
+        var title = section.match(/ title="(.+)"/g).shift();
+        title = title.substr(0, title.length - 1).replace(' title="', '');
+        var sectionSource = section.split(/\n/g);
+        sectionSource.shift();
+        sectionSource.pop();
+
+        var tabSize;
+        try {
+            tabSize = sectionSource[0].indexOf('<');
+        } catch (e) {
+            tabSize = 0;
+        }
+
+        sectionSource = sectionSource.map(function (line) {
+            return line.substr(tabSize, line.length);
+        });
+
+        return {
+            title: title,
+            source: sectionSource,
+        };
+    });
+
+    return {
+        filePath: filePath,
+        sections: sections,
+    };
 }
