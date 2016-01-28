@@ -5,15 +5,9 @@ import { HelloWorld } from 'components/HelloWorld';
 
 export default class FooSpec extends React.Component {
     render() {
-
-        var availableTitleSizes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map(tag =>
-            <GuideSection title={'HelloWorld - tag ' + tag} key={tag}>
-                <HelloWorld tag={tag}>Title {tag}</HelloWorld>
-            </GuideSection>
-        );
-
         return (
             <GuidePage>
+
                 <GuideSection title="HelloWorld - with children content">
                     <HelloWorld>with <b>children</b> content</HelloWorld>
                 </GuideSection>
@@ -22,7 +16,18 @@ export default class FooSpec extends React.Component {
                     <HelloWorld content="with content from params" />
                 </GuideSection>
 
-                {availableTitleSizes}
+                <GuideSection title="HelloWorld - tag H1">
+                    <HelloWorld tag="h1">Title H1</HelloWorld>
+                </GuideSection>
+
+                <GuideSection title="HelloWorld - tag H2">
+                    <HelloWorld tag="h2">Title H2</HelloWorld>
+                </GuideSection>
+
+                <GuideSection title="HelloWorld - tag H3">
+                    <HelloWorld tag="h3">Title H3</HelloWorld>
+                </GuideSection>
+
             </GuidePage>
         );
     }

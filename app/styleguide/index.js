@@ -79,7 +79,7 @@ class StyleguidePage extends React.Component {
                     footer={footer}
                     bsStyle="primary"
                     style={{ marginTop: 10 }}
-                    children={this.props.children}>
+                    children={this.props.children} />
             </Grid>
         );
     }
