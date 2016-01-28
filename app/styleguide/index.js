@@ -12,7 +12,11 @@
  * The above command will start a web server that renders your componet guide.
  */
 
-/* globals __STYLEGUIDE_COMPONENT__ __STYLEGUIDE_COMPONENTS__ __STYLEGUIDE_ROOT__ __STYLEGUIDE_SOURCES__ */
+
+/* globals __STYLEGUIDE_COMPONENT__ */
+/* globals __STYLEGUIDE_COMPONENTS__ */
+/* globals __STYLEGUIDE_ROOT__ */
+/* globals __STYLEGUIDE_SOURCES__ */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -21,6 +25,7 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Alert from 'react-bootstrap/lib/Alert';
 import Panel from 'react-bootstrap/lib/Panel';
 import PageHeader from 'react-bootstrap/lib/PageHeader';
+import Button from 'react-bootstrap/lib/Button';
 
 require('../client/index.scss');
 require('./index.scss');
@@ -227,13 +232,43 @@ export class GuideSectionSource extends React.Component {
     static propTypes = {
         lines: React.PropTypes.array,
     }
+    state = {
+        isOpen: false,
+    }
     render() {
-        var lines = this.props.lines.map((line, i) => {
-            return <span key={i}>{line}<br /></span>;
-        });
-        return (
-            <pre>{lines}</pre>
-        );
+        var content = null;
+        if (this.state.isOpen) {
+            var lines = this.props.lines.map((line, i) => {
+                return <span key={i}>{line}<br /></span>;
+            });
+            content = (
+                <Alert
+                    bsStyle="info"
+                    style={{
+                        marginTop: 10,
+                        background: '#eee',
+                        borderColor: '#aaa',
+                    }}
+                    onDismiss={() => this.setState({ isOpen: false })}>
+                    <pre style={{
+                        border: '0px solid black',
+                        padding: 0,
+                        margin: 0,
+                        background: 'transparent',
+                    }}>{lines}</pre>
+                </Alert>
+            );
+        } else {
+            content = (
+                <div style={{ textAlign: 'right', marginRight: 10 }}>
+                    <Button bsStyle="link" onClick={() => this.setState({ isOpen: true })}>
+                        Show Code
+                    </Button>
+                </div>
+            );
+        }
+
+        return content;
     }
 }
 
