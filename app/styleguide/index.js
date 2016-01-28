@@ -12,7 +12,7 @@
  * The above command will start a web server that renders your componet guide.
  */
 
-/* globals __STYLEGUIDE_COMPONENT__ __STYLEGUIDE_COMPONENTS__ */
+/* globals __STYLEGUIDE_COMPONENT__ __STYLEGUIDE_COMPONENTS__ __STYLEGUIDE_ROOT__ __STYLEGUIDE_SOURCES__ */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -41,10 +41,39 @@ class StyleguidePage extends React.Component {
         children: React.PropTypes.element.isRequired,
     }
     render() {
+        var componentFile = this.props.name + '.js';
+        var componentPath = [
+            __STYLEGUIDE_ROOT__,
+            'app',
+            'client',
+            'components',
+            componentFile,
+        ].join('/');
+        var header = (
+            <div>
+                {this.props.name}<br />
+            </div>
+        );
+        var footer = (
+            <small><code style={{
+                background: 'transparent',
+            }}>{componentPath}</code></small>
+        );
+
+        var children = React.Children.map(this.props.children, item => {
+            return item;
+            // console.log(item);
+            // return React.cloneElement(item, {
+            //     componentName: this.props.name,
+            //     componentFile: componentFile,
+            //     componentPath: componentPath,
+            // });
+        });
+
         return (
             <Grid style={{ marginTop: 10 }}>
-                <Panel header={this.props.name} bsStyle="primary">
-                    {this.props.children}
+                <Panel header={header} footer={footer} bsStyle="primary">
+                    {children}
                 </Panel>
             </Grid>
         );
@@ -56,6 +85,7 @@ class StyleguideIndex extends React.Component {
         components: React.PropTypes.array.isRequired,
     }
     render() {
+        // console.log(__STYLEGUIDE_SOURCES__);
         return (
             <div>
                 {this.props.components}
@@ -133,7 +163,10 @@ export class GuideSectionHeader extends React.Component {
 
 export class GuideSectionBody extends React.Component {
     static propTypes = {
-        children: React.PropTypes.element.isRequired,
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.array,
+        ]),
     }
     render() {
         var style = {
@@ -153,23 +186,56 @@ export class GuideSectionBody extends React.Component {
 export class GuideSection extends React.Component {
     static propTypes = {
         title: React.PropTypes.string,
-        children: React.PropTypes.element,
+        children: React.PropTypes.oneOfType([
+            React.PropTypes.element,
+            React.PropTypes.array,
+        ]),
     }
     render() {
         var style = {
             marginBottom: 40,
         };
+
+        var source = null;
+        __STYLEGUIDE_SOURCES__.forEach(component => {
+            component.sections.forEach(section => {
+                // console.log(section.title, this.props.title, section.title === this.props.title);
+                if (section.title === this.props.title) {
+                    // console.log(section);
+                    source = section.source;
+                }
+            });
+        });
+
+        if (source) {
+            source = <GuideSectionSource lines={source} />;
+        }
+
         return (
             <div style={style}>
                 <GuideSectionHeader>{this.props.title}</GuideSectionHeader>
                 <GuideSectionBody>
                     {this.props.children}
                 </GuideSectionBody>
+                {source}
             </div>
         );
     }
 }
 
+export class GuideSectionSource extends React.Component {
+    static propTypes = {
+        lines: React.PropTypes.array,
+    }
+    render() {
+        var lines = this.props.lines.map((line, i) => {
+            return <span key={i}>{line}<br /></span>;
+        });
+        return (
+            <pre>{lines}</pre>
+        );
+    }
+}
 
 /**
  * Render the styleguide for real
