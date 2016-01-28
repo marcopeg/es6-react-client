@@ -28,7 +28,7 @@ You can run the application in _production mode_ (minified bundle, without devel
 npm run app
 ```
 
-## Run a Single Component: the Styleguide
+## Run a Single Component
 
 During the development of a single component it is useful to run a mini-app in which to test controlled versions of that specific component.
 
@@ -40,6 +40,15 @@ npm start ComponentName
 
 > Use `yo reapp:component` to easily scaffold a new component and it's _Styleguide_ page.  
 > [more info here](https://github.com/marcopeg/generator-reapp)
+
+## Run the Styleguide
+
+Sometimes you need to take a look at the ensable of _Components_ that are defined in you application. The _Styleguide_ is exactly what you need:
+
+```
+npm start styleguide
+```
+
 
 ## Code Quality (eslint)
 
