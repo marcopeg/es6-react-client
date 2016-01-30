@@ -16,15 +16,15 @@ var appEnv = require('./app/env');
 // detect the request to run the styleguide
 var isStyleguide;
 var runComponent = process.argv[process.argv.length - 1];
-var runComponentFile = runComponent + '.guide.js';
-var runComponentPath = path.join(__dirname, 'app', 'styleguide', 'components', runComponentFile);
+var runComponentFile = runComponent + '.guide';
+var runComponentPath = path.join(__dirname, 'app', 'styleguide', 'components', runComponentFile + '.js');
 
 // Styleguide: single component
 var sources = [];
 if (fs.existsSync(runComponentPath)) {
     isStyleguide = true;
     webpackConfig = require('./config/webpack.config.guide');
-    appEnv.__STYLEGUIDE_COMPONENT__ = JSON.stringify(runComponent);
+    appEnv.__STYLEGUIDE_COMPONENT__ = JSON.stringify(runComponentFile);
 
     // export styleguide sources;
     try {
@@ -148,7 +148,7 @@ function runLocalAPI() {
 function getGuideSourceCode(filePath) {
     var source = fs.readFileSync(filePath, 'utf-8');
 
-    var sections = source.match(/<GuideSection(.|\n)*?<\/GuideSection>/g).map(function (section) {
+    var sections = source.match(/<SGSection(.|\n)*?<\/SGSection>/g).map(function (section) {
         var title = section.match(/ title="(.+)"/g).shift();
         title = title.substr(0, title.length - 1).replace(' title="', '');
         var sectionSource = section.split(/\n/g);
