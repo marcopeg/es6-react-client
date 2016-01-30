@@ -4,6 +4,8 @@ import React from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
 import Alert from 'react-bootstrap/lib/Alert';
 
+import { StyleguideTitle } from './StyleguideTitle';
+
 
 export class StyleguideError extends React.Component {
 
@@ -13,17 +15,11 @@ export class StyleguideError extends React.Component {
             React.PropTypes.string,
             React.PropTypes.number,
         ]),
+        title: React.PropTypes.string,
     }
 
     render() {
-        var { error } = this.props;
-
-        var styles = {
-            grid: {
-                marginTop: 50,
-            },
-        };
-
+        var { error, title } = this.props;
         var message = error.message || error.toString();
 
         if (message.indexOf('.guide') !== -1) {
@@ -31,7 +27,9 @@ export class StyleguideError extends React.Component {
         }
 
         return (
-            <Grid style={styles.grid}>
+            <Grid>
+                <StyleguideTitle title={title} />
+
                 <Alert bsStyle="danger">
                     <h4>Ooooops!</h4>
                     <p>{message}</p>

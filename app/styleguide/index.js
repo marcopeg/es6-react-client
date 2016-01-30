@@ -12,34 +12,24 @@
  * The above command will start a web server that renders your componet guide.
  */
 
-
 /* globals __STYLEGUIDE_COMPONENT__ */
 /* globals __STYLEGUIDE_COMPONENTS__ */
 /* globals __STYLEGUIDE_ROOT__ */
 /* globals __STYLEGUIDE_SOURCES__ */
+
+// customize the styleguide here
+var appName = 'es6-react-client';
+var styleguideTargetEl = document.getElementById('app');
+var styleguide;
+
+// import app's stylesheet
+require('../client/index.scss');
 
 import {
     renderMultiComponents,
     renderSingleComponent,
     renderStyleguideInfo,
 } from '../../reapp-dev-tools/src';
-
-
-require('../client/index.scss');
-require('./index.scss');
-
-
-
-
-/**
- * Render the styleguide for real
- */
-
-
-
-
-var styleguide;
-var styleguideTargetEl = document.getElementById('app');
 
 if (shouldRenderSingleComponent()) {
     styleguide = renderSingleComponent(
@@ -49,7 +39,8 @@ if (shouldRenderSingleComponent()) {
             name: __STYLEGUIDE_COMPONENT__,
             def: require('./components/' + __STYLEGUIDE_COMPONENT__),
         },
-        __STYLEGUIDE_SOURCES__
+        __STYLEGUIDE_SOURCES__,
+        appName
     );
 }
 
@@ -63,7 +54,8 @@ if (shouldRenderMultiComponents()) {
                 def: require('./components/' + componentName),
             };
         }),
-        __STYLEGUIDE_SOURCES__
+        __STYLEGUIDE_SOURCES__,
+        appName
     );
 }
 
@@ -71,7 +63,8 @@ if (styleguide !== true) {
     renderStyleguideInfo(
         styleguideTargetEl,
         __STYLEGUIDE_ROOT__,
-        styleguide
+        styleguide,
+        appName
     );
 }
 
