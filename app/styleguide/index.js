@@ -12,74 +12,35 @@
  * The above command will start a web server that renders your componet guide.
  */
 
-/* globals __STYLEGUIDE_COMPONENT__ */
-/* globals __STYLEGUIDE_COMPONENTS__ */
-/* globals __STYLEGUIDE_ROOT__ */
-/* globals __STYLEGUIDE_SOURCES__ */
-
 // customize the styleguide here
 var appName = 'es6-react-client';
 var styleguideTargetEl = document.getElementById('app');
-var styleguide;
 
 // import app's stylesheet
 require('../client/index.scss');
 
-import {
-    renderMultiComponents,
-    renderSingleComponent,
-    renderStyleguideInfo,
-} from 'reapp-dev-tools';
+/* globals __STYLEGUIDE__ */
+var styleguideInfo = __STYLEGUIDE__;
+import { renderMultiComponents, renderStyleguideInfo } from 'reapp-dev-tools';
 
-if (shouldRenderSingleComponent()) {
-    styleguide = renderSingleComponent(
+try {
+    renderMultiComponents(
         styleguideTargetEl,
-        __STYLEGUIDE_ROOT__,
-        {
-            name: __STYLEGUIDE_COMPONENT__,
-            def: require('./components/' + __STYLEGUIDE_COMPONENT__),
-        },
-        __STYLEGUIDE_SOURCES__,
-        appName
-    );
-}
-
-if (shouldRenderMultiComponents()) {
-    styleguide = renderMultiComponents(
-        styleguideTargetEl,
-        __STYLEGUIDE_ROOT__,
-        __STYLEGUIDE_COMPONENTS__.map(function (componentName) {
+        styleguideInfo.cdw,
+        styleguideInfo.components.map(function (component) {
             return {
-                name: componentName,
-                def: require('./components/' + componentName),
+                name: component.guideFile,
+                def: require('./components/' + component.guideFile),
             };
         }),
-        __STYLEGUIDE_SOURCES__,
+        styleguideInfo.sources,
         appName
     );
-}
-
-if (styleguide !== true) {
+} catch (e) {
     renderStyleguideInfo(
         styleguideTargetEl,
-        __STYLEGUIDE_ROOT__,
-        styleguide,
+        styleguideInfo.cdw,
+        e,
         appName
     );
-}
-
-function shouldRenderSingleComponent() {
-    try {
-        return __STYLEGUIDE_COMPONENT__ !== null;
-    } catch (e) {
-        return false;
-    }
-}
-
-function shouldRenderMultiComponents() {
-    try {
-        return __STYLEGUIDE_COMPONENTS__ !== null;
-    } catch (e) {
-        return false;
-    }
 }
