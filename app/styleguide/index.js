@@ -29,7 +29,7 @@ import {
     renderMultiComponents,
     renderSingleComponent,
     renderStyleguideInfo,
-} from '../../reapp-dev-tools/src';
+} from 'reapp-dev-tools';
 
 if (shouldRenderSingleComponent()) {
     styleguide = renderSingleComponent(
