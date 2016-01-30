@@ -17,7 +17,8 @@ export class StyleguideToc extends React.Component {
 
     render() {
         var { title } = this.props;
-        var components = this.props.components.map(name => {
+        var components = this.props.components.map(component => {
+            var { name } = component;
             return (
                 <ListGroupItem key={name} href={'#' + name}>
                     {name}

@@ -6,19 +6,23 @@ import Panel from 'react-bootstrap/lib/Panel';
 
 export class StyleguidePage extends React.Component {
 
+    static contextTypes = {
+        styleguideRoot: React.PropTypes.string,
+    }
+
     static propTypes = {
         name: React.PropTypes.string.isRequired,
-        root: React.PropTypes.string.isRequired,
         component: React.PropTypes.func.isRequired,
     }
 
     render() {
-        var { name, root, component } = this.props;
+        var { styleguideRoot } = this.context;
+        var { name, component } = this.props;
         var componentName = name.replace('.guide', '');
         var componentFile = componentName + '.js';
 
         var componentPath = [
-            root,
+            styleguideRoot,
             'app',
             'client',
             'components',
@@ -49,7 +53,7 @@ export class StyleguidePage extends React.Component {
         var Component = React.createElement(component);
 
         return (
-            <div id={this.props.name + '.guide'}>
+            <div id={name}>
                 <Panel
                     header={componentName}
                     footer={footer}
