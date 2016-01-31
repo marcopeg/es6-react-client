@@ -6,7 +6,7 @@ import Well from 'react-bootstrap/lib/Well';
 export class HelpMsg extends React.Component {
     render() {
         return (
-            <Well>
+            <Well data-ta="help-msg">
                 <p>
                     Hello, there are no logs so far.
                 </p>

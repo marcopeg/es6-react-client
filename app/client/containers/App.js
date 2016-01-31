@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 
 import Grid from 'react-bootstrap/lib/Grid';
 
+import { AppTitle } from 'components/AppTitle';
+import { VotePanel } from 'components/VotePanel';
+import { ResultsLog } from 'components/ResultsLog';
+
 @connect(s => s.app)
 export class App extends React.Component {
 
@@ -14,8 +18,10 @@ export class App extends React.Component {
     render() {
         return (
             <Grid>
-                <h3>{this.props.title}</h3>
-                <p>here you can write your app...</p>
+                <AppTitle value={this.props.title} />
+                <VotePanel />
+                <hr />
+                <ResultsLog />
             </Grid>
         );
     }
