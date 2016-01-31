@@ -44,8 +44,9 @@ export class Smiley extends React.Component {
 
         return (
             <span
-                className="smiley"
-                style={css}onClick={onClick}
+                data-is={is}
+                style={css}
+                onClick={onClick}
                 children={smiley} />
         );
     }

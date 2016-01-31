@@ -16,8 +16,8 @@ describe('Smiley Component', () => {
         var spy = sinon.spy();
         var el = <Smiley onClick={spy} />;
         var cmp = ReactTestUtils.renderIntoDocument(el);
-        var nod = ReactDOM.findDOMNode(cmp);
-        ReactTestUtils.Simulate.click(nod);
+        var dom = ReactDOM.findDOMNode(cmp);
+        ReactTestUtils.Simulate.click(dom);
         expect(spy.calledOnce).to.be.true;
     });
 

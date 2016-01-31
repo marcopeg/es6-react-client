@@ -13,10 +13,6 @@ export default class HelpMsgGuideComponent extends React.Component {
                     <HelpMsg />
                 </SGSection>
 
-                <SGSection title="HelpMsg - with value property">
-                    <HelpMsg value="Content for the component" />
-                </SGSection>
-
             </SGPage>
         );
     }

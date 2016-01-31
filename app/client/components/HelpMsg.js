@@ -1,23 +1,19 @@
 
 import React from 'react';
 
+import Well from 'react-bootstrap/lib/Well';
+
 export class HelpMsg extends React.Component {
-
-    static propTypes = {
-        value: React.PropTypes.string,
-    }
-
-    static defaultProps = {
-        value: 'A New Component',
-    }
-
     render() {
-        var { value } = this.props;
-
         return (
-            <div>
-                {value}
-            </div>
+            <Well>
+                <p>
+                    Hello, there are no logs so far.
+                </p>
+                <p className="lead">
+                    Click on the buttons above and tell me how are you!
+                </p>
+            </Well>
         );
     }
 }
