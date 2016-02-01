@@ -8,12 +8,13 @@ import { AppTitle } from 'components/AppTitle';
 import { VotePanel } from 'components/VotePanel';
 import { ResultsLog } from 'components/ResultsLog';
 
-import { addVote } from 'actions/votes-actions';
+import { vote } from 'services/votes-service';
 
-@connect(s => {
+@connect(state => {
     return {
-        title: s.app.title,
-        votes: s.votes,
+        title: state.app.title,
+        results: state.results,
+        rank: state.rank.currentValue,
     };
 })
 
@@ -21,25 +22,26 @@ export class App extends React.Component {
 
     static propTypes = {
         title: React.PropTypes.string,
-        votes: React.PropTypes.array,
+        results: React.PropTypes.array,
+        rank: React.PropTypes.number,
         dispatch: React.PropTypes.func,
     }
 
-    onAddVote = vote => {
+    onVote = value => {
         var { dispatch } = this.props;
-        dispatch(addVote(vote));
+        dispatch(vote(value));
     }
 
     render() {
-        var { onAddVote } = this;
-        var { title, votes } = this.props;
+        var { onVote } = this;
+        var { title, results, rank } = this.props;
 
         return (
             <Grid>
-                <AppTitle value={title} />
-                <VotePanel onVote={onAddVote} />
+                <AppTitle title={title} rank={rank} />
+                <VotePanel onVote={onVote} />
                 <hr />
-                <ResultsLog results={votes} />
+                <ResultsLog results={results} />
             </Grid>
         );
     }

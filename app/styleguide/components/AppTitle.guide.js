@@ -13,8 +13,12 @@ export default class AppTitleGuideComponent extends React.Component {
                     <AppTitle />
                 </SGSection>
 
-                <SGSection title="AppTitle - with value property">
-                    <AppTitle value="Custom App Title" />
+                <SGSection title="AppTitle - with title property">
+                    <AppTitle title="Custom App Title" />
+                </SGSection>
+
+                <SGSection title="AppTitle - with a rank value">
+                    <AppTitle title="Custom App Title" rank={100} />
                 </SGSection>
 
             </SGPage>

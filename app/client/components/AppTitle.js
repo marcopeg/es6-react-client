@@ -6,19 +6,28 @@ import PageHeader from 'react-bootstrap/lib/PageHeader';
 export class AppTitle extends React.Component {
 
     static propTypes = {
-        value: React.PropTypes.string,
+        title: React.PropTypes.string,
+        rank: React.PropTypes.number,
     }
 
     static defaultProps = {
-        value: 'Smiley!',
+        title: 'Smiley!',
     }
 
     render() {
-        var { value } = this.props;
+        var { title, rank } = this.props;
+
+        var subtitle;
+        if (rank) {
+            subtitle = (
+                <small> - {rank}</small>
+            );
+        }
 
         return (
             <PageHeader className="text-center">
-                {value}
+                {title}
+                {subtitle}
             </PageHeader>
         );
     }

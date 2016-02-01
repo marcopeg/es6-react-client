@@ -20,9 +20,9 @@ export class ResultsLogItem extends React.Component {
 
         return (
             <ListGroupItem data-ta="results-log-item">
-                <Badge>{rank}</Badge>
                 <Smiley is={value} style={{ marginRight: 10 }} />
                 <small>{date}</small>
+                <Badge>{rank}</Badge>
             </ListGroupItem>
         );
     }

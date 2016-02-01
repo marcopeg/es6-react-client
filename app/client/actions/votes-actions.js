@@ -10,7 +10,7 @@ export const VALID_VOTES = [
     'soso',
 ];
 
-export function addVote(value, rank = 0, ts = Date.now()) {
+export function addVote(value, rank, ts) {
 
     if (VALID_VOTES.indexOf(value) === -1) {
         throw new TypeError('addVote@votes(' + value + ')');

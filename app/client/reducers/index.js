@@ -1,10 +1,12 @@
 
 import { appReducer } from 'reducers/app-reducer';
-import { votesReducer } from 'reducers/votes-reducer';
+import { rankReducer } from 'reducers/rank-reducer';
+import { resultsReducer } from 'reducers/results-reducer';
 /* reapp: import new reducer */
 
 export const reducers = {
     app: appReducer,
-    votes: votesReducer,
+    rank: rankReducer,
+    results: resultsReducer,
     /* reapp: append new reducer */
 };

@@ -17,20 +17,19 @@ export class ResultsLog extends React.Component {
     }
 
     render() {
-
-        var results = this.props.results.map(result => (
-            <ResultsLogItem {...result} key={result.ts} />
-        ));
+        var { results } = this.props;
 
         if (!results.length) {
             return <HelpMsg />;
         }
 
-        results.reverse();
+        var items = results.map((result, i) => (
+            <ResultsLogItem {...result} key={i} />
+        ));
 
         return (
             <ListGroup data-ta="results-log">
-                {results}
+                {items}
             </ListGroup>
         );
     }
