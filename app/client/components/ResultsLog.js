@@ -26,6 +26,8 @@ export class ResultsLog extends React.Component {
             return <HelpMsg />;
         }
 
+        results.reverse();
+
         return (
             <ListGroup data-ta="results-log">
                 {results}
