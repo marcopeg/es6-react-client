@@ -3,6 +3,8 @@
  */
 
 module.exports = {
+    appName: 'es6-react-client',
+
     host: '0.0.0.0',
     port: 3000,
 
