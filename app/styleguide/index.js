@@ -10,6 +10,10 @@
  * ```
  *
  * The above command will start a web server that renders your componet guide.
+ *
+ * NOTE: do not remove nor alter the reapp comments,
+ *       they are used during scaffolding operations!
+ *
  */
 
 // customize the styleguide here
@@ -19,18 +23,33 @@ var styleguideTargetEl = document.getElementById('app');
 // import app's stylesheet
 require('../client/index.scss');
 
+/* reapp: start */
 /* globals __STYLEGUIDE__ */
 var styleguideInfo = __STYLEGUIDE__;
-import { renderMultiComponents, renderStyleguideInfo } from 'reapp-dev-tools';
+
+import {
+    renderMultiComponents,
+    renderStyleguideInfo,
+} from 'reapp-dev-tools';
 
 try {
     renderMultiComponents(
         styleguideTargetEl,
         styleguideInfo.cdw,
         styleguideInfo.components.map(function (component) {
+
+            var StyleguidePage;
+            if (component.plugin) {
+                /* eslint-disable */
+                StyleguidePage = require('../plugins/' + component.plugin + '/styleguide/components/' + component.guideFile);
+                /* eslint-enable */
+            } else {
+                StyleguidePage = require('./components/' + component.guideFile);
+            }
+
             return {
                 name: component.guideFile,
-                def: require('./components/' + component.guideFile),
+                def: StyleguidePage,
             };
         }),
         styleguideInfo.sources,
@@ -44,3 +63,4 @@ try {
         appName
     );
 }
+/* reapp: end */

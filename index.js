@@ -1,5 +1,9 @@
 /**
- * Development Server
+ * Reapp Development Server
+ *
+ * NOTE: do not remove nor alter the reapp comments,
+ *       they are used during scaffolding operations!
+ *
  */
 
 var webpack = require('webpack');
@@ -9,7 +13,7 @@ var webpackConfig = require('./config/webpack.config');
 var serverCfg = require('./config/server.conf');
 var appEnv = require('./app/env');
 
-// init reapp
+/* reapp: start */
 var reapp = require('reapp-dev-tools/lib/server/reapp');
 reapp.init(__dirname, serverCfg);
 
@@ -30,3 +34,4 @@ new WebpackDevServer(
     webpack(webpackConfig),
     reapp.config(webpackConfig.devServer)
 ).listen(serverCfg.port, serverCfg.host, reapp.callback);
+/* reapp: end */
