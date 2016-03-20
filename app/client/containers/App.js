@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import Grid from 'react-bootstrap/lib/Grid';
 
-import { AppTitle } from 'components/AppTitle';
-import { VotePanel } from 'components/VotePanel';
-import { ResultsLog } from 'components/ResultsLog';
+import AppTitle from 'components/AppTitle';
+import VotePanel from 'components/VotePanel';
+import ResultsLog from 'components/ResultsLog';
 
 import { vote } from 'services/votes-service';
 
@@ -18,7 +18,7 @@ import { vote } from 'services/votes-service';
     };
 })
 
-export class App extends React.Component {
+export default class App extends React.Component {
 
     static propTypes = {
         title: React.PropTypes.string,

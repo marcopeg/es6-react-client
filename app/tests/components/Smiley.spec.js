@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 
-import { Smiley } from 'components/Smiley';
+import Smiley from 'components/Smiley';
 
 describe('Smiley Component', () => {
 

@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 
 import results from 'fixtures/results.fixture';
-import { ResultsLog } from 'components/ResultsLog';
+import ResultsLog from 'components/ResultsLog';
 
 describe('ResultsLog Component', () => {
     it('should render without exceptions', () => {

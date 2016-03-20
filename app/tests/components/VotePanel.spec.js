@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-addons-test-utils';
 
-import { VotePanel } from 'components/VotePanel';
+import VotePanel from 'components/VotePanel';
 
 describe('VotePanel Component', () => {
     it('should render without exceptions', () => {

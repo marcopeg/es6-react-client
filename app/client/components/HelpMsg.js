@@ -3,7 +3,7 @@ import React from 'react';
 
 import Well from 'react-bootstrap/lib/Well';
 
-export class HelpMsg extends React.Component {
+export default class HelpMsg extends React.Component {
     render() {
         return (
             <Well data-ta="help-msg">

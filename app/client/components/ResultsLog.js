@@ -3,10 +3,10 @@ import React from 'react';
 
 import ListGroup from 'react-bootstrap/lib/ListGroup';
 
-import { HelpMsg } from 'components/HelpMsg';
-import { ResultsLogItem } from 'components/ResultsLogItem';
+import HelpMsg from 'components/HelpMsg';
+import ResultsLogItem from 'components/ResultsLogItem';
 
-export class ResultsLog extends React.Component {
+export default class ResultsLog extends React.Component {
 
     static propTypes = {
         results: React.PropTypes.array,

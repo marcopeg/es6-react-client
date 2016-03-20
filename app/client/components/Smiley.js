@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-export class Smiley extends React.Component {
+export default class Smiley extends React.Component {
 
     static propTypes = {
         is: React.PropTypes.string,

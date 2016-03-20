@@ -3,7 +3,7 @@ import React from 'react';
 
 import PageHeader from 'react-bootstrap/lib/PageHeader';
 
-export class AppTitle extends React.Component {
+export default class AppTitle extends React.Component {
 
     static propTypes = {
         title: React.PropTypes.string,

@@ -4,9 +4,9 @@ import React from 'react';
 import ListGroupItem from 'react-bootstrap/lib/ListGroupItem';
 import Badge from 'react-bootstrap/lib/Badge';
 
-import { Smiley } from 'components/Smiley';
+import Smiley from 'components/Smiley';
 
-export class ResultsLogItem extends React.Component {
+export default class ResultsLogItem extends React.Component {
 
     static propTypes = {
         value: React.PropTypes.string.isRequired,

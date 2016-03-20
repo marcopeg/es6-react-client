@@ -6,8 +6,8 @@ import ReactTestUtils from 'react-addons-test-utils';
 import { Provider } from 'react-redux';
 import { makeStore } from 'utils/store';
 
-import { App } from 'containers/App';
-import { initialState } from 'fixtures/initial-state-prod.fixture';
+import App from 'containers/App';
+import initialState from 'fixtures/initial-state-prod.fixture';
 
 describe('App Container', function () {
     it('should render home screen', function () {

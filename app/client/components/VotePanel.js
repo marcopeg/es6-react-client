@@ -5,11 +5,11 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
-import { Smiley } from 'components/Smiley';
+import Smiley from 'components/Smiley';
 
 import { __noop } from 'utils/mish';
 
-export class VotePanel extends React.Component {
+export default class VotePanel extends React.Component {
 
     static propTypes = {
         size: React.PropTypes.number,
