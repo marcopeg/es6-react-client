@@ -73,6 +73,10 @@ npm run lint
 
 _(*) In case of errors it shows an horrible NPM related error trace which is completely unrelated to the real code investigation. Just ignore it or run the direct invocation command._
 
+### Eslint within your editor
+
+	npm install -g eslint eslint-plugin-nodeca eslint-plugin-react babel-eslint
+
 ## Testing
 
 The testing environment is based on `KarmaJS` and requires some packages that are not installed by default.
