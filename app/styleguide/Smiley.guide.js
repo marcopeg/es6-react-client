@@ -4,7 +4,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 
-import { Smiley } from 'components/Smiley';
+import Smiley from 'components/Smiley';
 
 export default class SmileyGuideComponent extends React.Component {
     render() {

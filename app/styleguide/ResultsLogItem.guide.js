@@ -2,7 +2,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 
-import { ResultsLogItem } from 'components/ResultsLogItem';
+import ResultsLogItem from 'components/ResultsLogItem';
 
 export default class ResultsLogItemGuideComponent extends React.Component {
     render() {

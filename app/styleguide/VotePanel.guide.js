@@ -2,7 +2,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 
-import { VotePanel } from 'components/VotePanel';
+import VotePanel from 'components/VotePanel';
 
 export default class VotePanelGuideComponent extends React.Component {
 

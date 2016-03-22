@@ -2,7 +2,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 import results from 'fixtures/results.fixture';
-import { ResultsLog } from 'components/ResultsLog';
+import ResultsLog from 'components/ResultsLog';
 
 export default class ResultsLogGuideComponent extends React.Component {
     render() {

@@ -2,7 +2,7 @@ import React from 'react';
 import { SGPage, SGSection } from 'reapp-dev-tools';
 
 
-import { AppTitle } from 'components/AppTitle';
+import AppTitle from 'components/AppTitle';
 
 export default class AppTitleGuideComponent extends React.Component {
     render() {
