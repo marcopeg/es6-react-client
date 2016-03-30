@@ -1,3 +1,4 @@
+/* global BASE_PATH */
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -42,6 +43,7 @@ export default class App extends React.Component {
                 <VotePanel onVote={onVote} />
                 <hr />
                 <ResultsLog results={results} />
+                <img src={BASE_PATH + 'assets/react-logo.png'} width={89} />
             </Grid>
         );
     }
