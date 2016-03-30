@@ -37,13 +37,19 @@ export default class App extends React.Component {
         var { onVote } = this;
         var { title, results, rank } = this.props;
 
+        // Here is how to use variables from `app/env.js`
+        var reactLogo = (
+            <img src={BASE_PATH + 'assets/react-logo.png'} width={89} />
+        );
+
         return (
             <Grid>
                 <AppTitle title={title} rank={rank} />
                 <VotePanel onVote={onVote} />
                 <hr />
                 <ResultsLog results={results} />
-                <img src={BASE_PATH + 'assets/react-logo.png'} width={89} />
+
+                {reactLogo}
             </Grid>
         );
     }

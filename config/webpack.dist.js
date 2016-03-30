@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var config = require('./webpack.config');
 var appEnv = require('../app/env');
+var reappDevTools = require('reapp-dev-tools');
 
 appEnv['process.env.NODE_ENV'] = '"production"';
 
@@ -16,7 +17,7 @@ config.externals = {
 };
 
 config.plugins = [
-    new webpack.DefinePlugin(appEnv),
+    new webpack.DefinePlugin(reappDevTools.json2env(appEnv)),
     new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false,

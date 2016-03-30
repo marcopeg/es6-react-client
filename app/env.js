@@ -11,7 +11,8 @@
  */
 
 var APP_ENV = {
-    BASE_PATH: JSON.stringify('/'),
+    BASE_PATH: '/',
+    BASE_COLOR: '#eee',
 };
 
 /**
@@ -21,7 +22,8 @@ var APP_ENV = {
 /* eslint no-process-env:0 */
 if (process.env.NODE_ENV === 'development') {
     APP_ENV = Object.assign({}, APP_ENV, {
-        BASE_PATH: JSON.stringify('/dist/'),
+        BASE_PATH: '/dist/',
+        BASE_COLOR: '#aaa',
     });
 }
 

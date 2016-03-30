@@ -1,6 +1,6 @@
 {
   "name": "react-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "reapp.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "react-dom": "^0.14.x",
     "react-hot-loader": "^1.3.x",
     "react-redux": "^4.0.x",
-    "reapp-dev-tools": "0.0.x",
+    "reapp-dev-tools": "0.1.x",
     "redux": "^3.0.x",
     "redux-devtools": "^3.0.x",
     "redux-devtools-dock-monitor": "^1.0.x",
