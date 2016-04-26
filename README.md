@@ -1,4 +1,4 @@
-# React Client
+# es6-react-client
 
 > Starter kit to buid `React/Redux` based _Single Page Apps_.  
 > You can easily create new apps based on this project by using the
@@ -9,7 +9,7 @@
 ```
 npm install
 ```
-	
+    
 **NOTE:** this command will install the library that are essential to the execution of your app and _Styleguide_. If you plan to run quality tasks such linting and testing you'd better run the full install:
 
 ```
@@ -31,7 +31,7 @@ npm start
 ## Run the App - production
 
 You can run the application in _production mode_ (minified bundle, without development & debug facilities):
-	
+    
 ```
 npm run app
 ```
@@ -66,16 +66,12 @@ npm run install:lint
 
 // through NPM interface (*)
 npm run lint
-	
+    
 // or
 ./node_modules/eslint/bin/eslint.js ./
 ```
 
 _(*) In case of errors it shows an horrible NPM related error trace which is completely unrelated to the real code investigation. Just ignore it or run the direct invocation command._
-
-### Eslint within your editor
-
-	npm install -g eslint eslint-plugin-nodeca eslint-plugin-react babel-eslint
 
 ## Testing
 
