@@ -1,3 +1,5 @@
+/* eslint no-process-env:0 */
+
 var path = require('path');
 var webpack = require('webpack');
 var appEnv = require('../app/env');
@@ -22,7 +24,9 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
-        new webpack.DefinePlugin(reappDevTools.json2env(appEnv)),
+        new webpack.DefinePlugin(Object.assign({}, reappDevTools.json2env(appEnv), {
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        })),
     ],
     resolve: {
         extensions: ['', '.js'],
@@ -98,9 +102,11 @@ module.exports = {
     },
     devServer: {
         hot: true,
-        stats: { colors: true },
         historyApiFallback: {
             index: '/config/client.html',
+        },
+        stats: {
+            colors: true,
         },
     },
 };
